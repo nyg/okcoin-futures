@@ -1,0 +1,55 @@
+* {
+    font-family: Menlo, Consolas, monospace;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 16px;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+caption {
+    font-family: sans-serif;
+    padding: 25px 0px 30px 0px;
+}
+
+th {
+    font-size: 14px;
+    width: 120px;
+}
+
+th, td {
+    text-align: right;
+    padding: 10px 20px 10px 0px;
+    border: 1px solid black;
+}
+
+table tr:first-of-type * {
+    border-top: none;
+}
+
+table tr:last-of-type * {
+    border-bottom: none;
+}
+
+table tr *:first-child {
+    border-left: none;
+}
+
+table tr *:last-child {
+    border-right: none;
+}
+
+p, a {
+  text-align: center;
+  font-size: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

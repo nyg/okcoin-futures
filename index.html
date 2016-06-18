@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>OKCoin Futures Premium</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+  </head>
+  <body>
+      <table>
+          <caption>OKCoin XBTUSD Futures Premium in Relation to the Spot Price</caption>
+          <tr class="top">
+              <th class="left"></th>
+              <th>Spot</th>
+              <th>Weekly</th>
+              <th>Bi-Weekly</th>
+              <th>Quarterly</th>
+          </tr>
+          <tr>
+              <th class="left">Last Price</th>
+              <td id="price-spot"></td>
+              <td id="price-weekly"></td>
+              <td id="price-bi-weekly"></td>
+              <td id="price-quarterly"></td>
+          </tr>
+          <tr>
+              <th class="left">±</th>
+              <td></td>
+              <td id="diff-weekly"></td>
+              <td id="diff-bi-weekly"></td>
+              <td id="diff-quarterly"></td>
+          </tr>
+          <tr class="bottom">
+              <th class="left">%</th>
+              <td id="perc-spot"></td>
+              <td id="perc-weekly"></td>
+              <td id="perc-bi-weekly"></td>
+              <td id="perc-quarterly"></td>
+          </tr>
+      </table>
+      <p>
+          <a href="https://okcoin.com">okcoin.com</a> - 
+          <a href="https://github.com/nyg/okcoin-futures">github repo</a>
+      </p>
+  </body>
+</html>
