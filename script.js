@@ -6,7 +6,11 @@ ws.onopen = function () {
         {'event':'addChannel','channel':'ok_sub_futureusd_btc_index'},
         {'event':'addChannel','channel':'ok_sub_futureusd_btc_trade_this_week'},
         {'event':'addChannel','channel':'ok_sub_futureusd_btc_trade_next_week'},
-        {'event':'addChannel','channel':'ok_sub_futureusd_btc_trade_quarter'}
+        {'event':'addChannel','channel':'ok_sub_futureusd_btc_trade_quarter'},
+        {'event':'addChannel','channel':'ok_sub_futureusd_ltc_index'},
+        {'event':'addChannel','channel':'ok_sub_futureusd_ltc_trade_this_week'},
+        {'event':'addChannel','channel':'ok_sub_futureusd_ltc_trade_next_week'},
+        {'event':'addChannel','channel':'ok_sub_futureusd_ltc_trade_quarter'}
     ]))
 }
 
@@ -30,8 +34,6 @@ ws.onclose = function () {
     console.log('Connection closed')
 }
 
-var index, weekly, biWeekly, quarterly;
-
 function handle(message) {
     if (message.hasOwnProperty('data')) {
         if (message.data.hasOwnProperty('futureIndex')) {
@@ -49,38 +51,51 @@ function handle(message) {
 }
 
 function updateTable(channel, amount) {
-    switch (channel) {
-        case 'ok_sub_futureusd_btc_index':
-            index = amount
-            updateCell('price-index', amount);
-            break;
-        case 'ok_sub_futureusd_btc_trade_this_week':
-            weekly = amount
-            updateAmounts('weekly', amount)
-            break;
-        case 'ok_sub_futureusd_btc_trade_next_week':
-            biWeekly = amount
-            updateAmounts('bi-weekly', amount)
-            break;
-        case 'ok_sub_futureusd_btc_trade_quarter':
-            quarterly = amount
-            updateAmounts('quarterly', amount)
-            break;
+    var ccy = channel.match(/btc/) ? 'btc' : 'ltc'
+    if (channel.match(/index/)) {
+        updateCell(ccy + '-price-index', amount)
+    }
+    else if (channel.match(/this_week/)) {
+        updateAmounts(ccy, 'weekly', amount)
+    }
+    else if (channel.match(/next_week/)) {
+        updateAmounts(ccy, 'bi-weekly', amount)
+    }
+    else if (channel.match(/quarter/)) {
+        updateAmounts(ccy, 'quarterly', amount)
+    }
+    else {
+        console.log(channel)
     }
 }
 
-function updateAmounts(type, amount) {
-    updateCell('price-' + type, amount)
-    updateCell('diff-' + type, amount - index)
-    updateCell('perc-' + type, (amount - index) / index * 100)
+function updateAmounts(ccy, type, amount) {
+    var index = getIndex(ccy)
+    updateCell(ccy + '-price-' + type, amount)
+    updateCell(ccy + '-diff-' + type, amount - index)
+    updateCell(ccy + '-perc-' + type, (amount / index - 1) * 100)
 }
 
 function updateCell(cellId, newAmount) {
     var cell = document.getElementById(cellId),
-        currentAmount = parseFloat(cell.getAttribute('exact-value')) || 0
+        currentAmount = getExactValue(cellId, 0)
     cell.setAttribute('exact-value', newAmount)
     cell.textContent = newAmount.toFixed(2)
-    cell.style.color = newAmount > currentAmount ? 'green' : 'red'
+    if (newAmount > currentAmount) {
+        cell.style.color = 'green'
+    }
+    else if (newAmount < currentAmount) {
+        cell.style.color = 'red'
+    }
+}
+
+function getIndex(ccy) {
+    return getExactValue(ccy + '-price-index')
+}
+
+function getExactValue(cellId, defaultValue) {
+    var cell = document.getElementById(cellId)
+    return parseFloat(cell.getAttribute('exact-value')) || defaultValue
 }
 
 function isArray(array) {
