@@ -76,26 +76,48 @@ function updateAmounts(ccy, type, amount) {
     updateCell(ccy + '-perc-' + type, (amount / index - 1) * 100)
 }
 
-function updateCell(cellId, newAmount) {
-    var cell = document.getElementById(cellId),
-        currentAmount = getExactValue(cellId, 0)
-    cell.setAttribute('exact-value', newAmount)
-    cell.textContent = newAmount.toFixed(2)
-    if (newAmount > currentAmount) {
-        cell.style.color = 'green'
+function updateCell(spanId, newValue) {
+    var value = getValue(spanId)
+    setValue(spanId, newValue)
+    setMinMaxValue(spanId, newValue)
+    setValueStyle(spanId, value, newValue)
+}
+
+function setValue(spanId, value) {
+    document.getElementById(spanId).textContent = value.toFixed(2)
+    document.getElementById(spanId).setAttribute('exact-value', value)
+}
+
+function setMinMaxValue(spanId, value) {
+    var min = getValue(spanId + '-min', Infinity),
+        max = getValue(spanId + '-max', -Infinity)
+    if (value < min) {
+        setValue(spanId + '-min', value)
     }
-    else if (newAmount < currentAmount) {
-        cell.style.color = 'red'
+    if (value > max) {
+        setValue(spanId + '-max', value)
+    }
+}
+
+function setValueStyle(spanId, value, newValue) {
+    var span = document.getElementById(spanId)
+    span.style.fontSize = '16px'
+    if (newValue > value) {
+        span.style.color = 'green'
+    }
+    else if (newValue < value) {
+        span.style.color = 'red'
     }
 }
 
 function getIndex(ccy) {
-    return getExactValue(ccy + '-price-index')
+    return getValue(ccy + '-price-index')
 }
 
-function getExactValue(cellId, defaultValue) {
-    var cell = document.getElementById(cellId)
-    return parseFloat(cell.getAttribute('exact-value')) || defaultValue
+function getValue(spanId, defaultValue) {
+    var span = document.getElementById(spanId)
+    if (span == null) console.log(spanId)
+    return parseFloat(span.getAttribute('exact-value')) || defaultValue
 }
 
 function isArray(array) {
