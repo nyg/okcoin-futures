@@ -3,7 +3,7 @@ var ws = new WebSocket('wss://real.okcoin.com:10440/websocket/okcoinapi')
 ws.onopen = function () {
     console.log('Connection opened')
     ws.send(JSON.stringify([
-        {'event':'addChannel','channel':'ok_sub_spotusd_btc_trades'},
+        {'event':'addChannel','channel':'ok_sub_futureusd_btc_index'},
         {'event':'addChannel','channel':'ok_sub_futureusd_btc_trade_this_week'},
         {'event':'addChannel','channel':'ok_sub_futureusd_btc_trade_next_week'},
         {'event':'addChannel','channel':'ok_sub_futureusd_btc_trade_quarter'}
@@ -12,7 +12,7 @@ ws.onopen = function () {
 
 ws.onmessage = function (event) {
     var data = JSON.parse(event.data)
-    if ('[object Array]' == Object.prototype.toString.call(data)) {
+    if (isArray(data)) {
         data.forEach(function (message) {
             handle(message)
         })
@@ -30,13 +30,18 @@ ws.onclose = function () {
     console.log('Connection closed')
 }
 
-var spot, weekly, biWeekly, quarterly;
+var index, weekly, biWeekly, quarterly;
 
 function handle(message) {
     if (message.hasOwnProperty('data')) {
-        message.data.forEach(function (trade) {
-            updateTable(message.channel, parseFloat(trade[1]))
-        })
+        if (message.data.hasOwnProperty('futureIndex')) {
+            updateTable(message.channel, parseFloat(message.data.futureIndex))
+        }
+        else {
+            message.data.forEach(function (trade) {
+                updateTable(message.channel, parseFloat(trade[1]))
+            })
+        }
     }
     else {
         console.log(message)
@@ -45,9 +50,9 @@ function handle(message) {
 
 function updateTable(channel, amount) {
     switch (channel) {
-        case 'ok_sub_spotusd_btc_trades':
-            spot = amount
-            updateCell('price-spot', amount);
+        case 'ok_sub_futureusd_btc_index':
+            index = amount
+            updateCell('price-index', amount);
             break;
         case 'ok_sub_futureusd_btc_trade_this_week':
             weekly = amount
@@ -66,8 +71,8 @@ function updateTable(channel, amount) {
 
 function updateAmounts(type, amount) {
     updateCell('price-' + type, amount)
-    updateCell('diff-' + type, amount - spot)
-    updateCell('perc-' + type, (amount - spot) / spot * 100)
+    updateCell('diff-' + type, amount - index)
+    updateCell('perc-' + type, (amount - index) / index * 100)
 }
 
 function updateCell(cellId, newAmount) {
@@ -76,4 +81,8 @@ function updateCell(cellId, newAmount) {
     cell.setAttribute('exact-value', newAmount)
     cell.textContent = newAmount.toFixed(2)
     cell.style.color = newAmount > currentAmount ? 'green' : 'red'
+}
+
+function isArray(array) {
+    return '[object Array]' == Object.prototype.toString.call(array)
 }

@@ -1,4 +1,4 @@
 # okcoin-futures
-Shows OKCoin Futures premium compared to the spot price.
+Shows OKCoin futures premium compared to OKCoin's futures index.
 
 Demo @ http://nyg.github.io/okcoin-futures
