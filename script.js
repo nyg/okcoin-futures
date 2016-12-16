@@ -79,7 +79,7 @@ function updateAmounts(ccy, type, amount) {
     updateCell(ccy + '-diff-' + type, diff)
     updateCell(ccy + '-perc-' + type, delta)
 
-    if (type == 'quarterly') {
+    if (ccy == 'btc' && type == 'quarterly') {
         setPageTitle(amount, diff, delta)
     }
 }
