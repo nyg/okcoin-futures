@@ -70,10 +70,18 @@ function updateTable(channel, amount) {
 }
 
 function updateAmounts(ccy, type, amount) {
-    var index = getIndex(ccy)
+    
+    var index = getIndex(ccy),
+        diff = amount - index,
+        delta = diff / index * 100
+
     updateCell(ccy + '-price-' + type, amount)
-    updateCell(ccy + '-diff-' + type, amount - index)
-    updateCell(ccy + '-perc-' + type, (amount / index - 1) * 100)
+    updateCell(ccy + '-diff-' + type, diff)
+    updateCell(ccy + '-perc-' + type, delta)
+
+    if (type == 'quarterly') {
+        setPageTitle(amount, diff, delta)
+    }
 }
 
 function updateCell(spanId, newValue) {
@@ -81,6 +89,10 @@ function updateCell(spanId, newValue) {
     setValue(spanId, newValue)
     setMinMaxValue(spanId, newValue)
     setValueStyle(spanId, value, newValue)
+}
+
+function setPageTitle(amount, diff, delta) {
+    document.title = amount.toFixed(2) + ' - ' + diff.toFixed(2) + ' - ' + delta.toFixed(2) + '%'
 }
 
 function setValue(spanId, value) {
