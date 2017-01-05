@@ -10,7 +10,8 @@ new OKCoin('com', {
 }).start()
 
 new OKCoin('cn', {
-    ok_sub_spotcny_btc_trades: handleMessage
+    ok_sub_spotcny_btc_trades: handleMessage,
+    ok_sub_spotcny_ltc_trades: handleMessage
 }).start()
 
 function handleMessage(message) {
