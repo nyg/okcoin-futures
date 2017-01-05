@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>OKCoin Futures Premium</title>
-    <script src="script.js"></script>
     <link rel="stylesheet" href="style.css" type="text/css"/>
   </head>
   <body>
@@ -13,6 +12,7 @@
           <caption>Bitcoin</caption>
           <tr class="top">
               <th class="left"></th>
+              <th>Spot CNY</th>
               <th>Index</th>
               <th>Weekly</th>
               <th>Bi-Weekly</th>
@@ -20,6 +20,10 @@
           </tr>
           <tr>
               <th class="left">Last</th>
+              <td>
+                  <span id="btc-price-cny"></span><br>
+                  <span id="btc-price-cny-min"></span> - <span id="btc-price-cny-max"></span>
+              </td>
               <td>
                   <span id="btc-price-index"></span><br>
                   <span id="btc-price-index-min"></span> - <span id="btc-price-index-max"></span>
@@ -40,6 +44,7 @@
           <tr>
               <th class="left">±</th>
               <td></td>
+              <td></td>
               <td>
                   <span id="btc-diff-weekly"></span><br>
                   <span id="btc-diff-weekly-min"></span> - <span id="btc-diff-weekly-max"></span>
@@ -55,6 +60,7 @@
           </tr>
           <tr class="bottom">
               <th class="left">%</th>
+              <td></td>
               <td></td>
               <td>
                   <span id="btc-perc-weekly"></span><br>
@@ -75,6 +81,7 @@
           <caption>Litecoin</caption>
           <tr class="top">
               <th class="left"></th>
+              <th>Spot CNY</th>
               <th>Index</th>
               <th>Weekly</th>
               <th>Bi-Weekly</th>
@@ -82,6 +89,10 @@
           </tr>
           <tr>
               <th class="left">Last</th>
+              <td>
+                  <span id="ltc-price-cny"></span><br>
+                  <span id="ltc-price-cny-min"></span> - <span id="ltc-price-cny-max"></span>
+              </td>
               <td>
                   <span id="ltc-price-index"></span><br>
                   <span id="ltc-price-index-min"></span> - <span id="ltc-price-index-max"></span>
@@ -102,6 +113,7 @@
           <tr>
               <th class="left">±</th>
               <td></td>
+              <td></td>
               <td>
                   <span id="ltc-diff-weekly"></span><br>
                   <span id="ltc-diff-weekly-min"></span> - <span id="ltc-diff-weekly-max"></span>
@@ -117,6 +129,7 @@
           </tr>
           <tr class="bottom">
               <th class="left">%</th>
+              <td></td>
               <td></td>
               <td>
                   <span id="ltc-perc-weekly"></span><br>
@@ -134,8 +147,12 @@
       </table>
 
       <p class="footer">
-          <a href="https://okcoin.com">okcoin.com</a> -
+          <a href="https://nyg.github.io">home</a> -
           <a href="https://github.com/nyg/okcoin-futures">github repo</a>
       </p>
+
+      <script src="js/okcoin-api/okcoin-api.js"></script>
+      <script src="js/ui.js"></script>
+      <script src="js/script.js"></script>
   </body>
 </html>

@@ -1,58 +1,9 @@
-var ws = new WebSocket('wss://real.okcoin.com:10440/websocket/okcoinapi')
-
-ws.onopen = function () {
-    console.log('Connection opened')
-    ws.send(JSON.stringify([
-        {'event':'addChannel','channel':'ok_sub_futureusd_btc_index'},
-        {'event':'addChannel','channel':'ok_sub_futureusd_btc_trade_this_week'},
-        {'event':'addChannel','channel':'ok_sub_futureusd_btc_trade_next_week'},
-        {'event':'addChannel','channel':'ok_sub_futureusd_btc_trade_quarter'},
-        {'event':'addChannel','channel':'ok_sub_futureusd_ltc_index'},
-        {'event':'addChannel','channel':'ok_sub_futureusd_ltc_trade_this_week'},
-        {'event':'addChannel','channel':'ok_sub_futureusd_ltc_trade_next_week'},
-        {'event':'addChannel','channel':'ok_sub_futureusd_ltc_trade_quarter'}
-    ]))
-}
-
-ws.onmessage = function (event) {
-    var data = JSON.parse(event.data)
-    if (isArray(data)) {
-        data.forEach(function (message) {
-            handle(message)
-        })
-    }
-    else {
-        console.log(data)
-    }
-}
-
-ws.onerror = function (e) {
-    console.log(e)
-}
-
-ws.onclose = function () {
-    console.log('Connection closed')
-}
-
-function handle(message) {
-    if (message.hasOwnProperty('data')) {
-        if (message.data.hasOwnProperty('futureIndex')) {
-            updateTable(message.channel, parseFloat(message.data.futureIndex))
-        }
-        else {
-            message.data.forEach(function (trade) {
-                updateTable(message.channel, parseFloat(trade[1]))
-            })
-        }
-    }
-    else {
-        console.log(message)
-    }
-}
-
 function updateTable(channel, amount) {
     var ccy = channel.match(/btc/) ? 'btc' : 'ltc'
-    if (channel.match(/index/)) {
+    if (channel.match(/trades/)) {
+        updateCell(ccy + '-price-cny', amount)
+    }
+    else if (channel.match(/index/)) {
         updateCell(ccy + '-price-index', amount)
     }
     else if (channel.match(/this_week/)) {
@@ -70,7 +21,7 @@ function updateTable(channel, amount) {
 }
 
 function updateAmounts(ccy, type, amount) {
-    
+
     var index = getIndex(ccy),
         diff = amount - index,
         delta = diff / index * 100
@@ -130,8 +81,4 @@ function getValue(spanId, defaultValue) {
     var span = document.getElementById(spanId)
     if (span == null) console.log(spanId)
     return parseFloat(span.getAttribute('exact-value')) || defaultValue
-}
-
-function isArray(array) {
-    return '[object Array]' == Object.prototype.toString.call(array)
 }
