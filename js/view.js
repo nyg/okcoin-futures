@@ -1,5 +1,7 @@
 function updateTable(channel, amount) {
+
     var ccy = channel.match(/btc/) ? 'btc' : 'ltc'
+
     if (channel.match(/trades/)) {
         updateCell(ccy + '-price-cny', amount)
     }
@@ -18,6 +20,10 @@ function updateTable(channel, amount) {
     else {
         console.log(channel)
     }
+
+    if (ccy == 'btc' && channel.match(/quarter|trades/)) {
+        updatePageTitle()
+    }
 }
 
 function updateAmounts(ccy, type, amount) {
@@ -29,10 +35,6 @@ function updateAmounts(ccy, type, amount) {
     updateCell(ccy + '-price-' + type, amount)
     updateCell(ccy + '-diff-' + type, diff)
     updateCell(ccy + '-perc-' + type, delta)
-
-    if (ccy == 'btc' && type == 'quarterly') {
-        setPageTitle(amount, diff, delta)
-    }
 }
 
 function updateCell(spanId, newValue) {
@@ -42,18 +44,32 @@ function updateCell(spanId, newValue) {
     setValueStyle(spanId, value, newValue)
 }
 
-function setPageTitle(amount, diff, delta) {
-    document.title = amount.toFixed(2) + ' - ' + diff.toFixed(2) + ' - ' + delta.toFixed(2) + '%'
+function updatePageTitle() {
+    var spot = getSpotBtcCny() || 0,
+        index = getIndex('btc') || 1
+        quarterly = getQuarterlyBtc() || 0,
+        diff = quarterly - index,
+        delta = diff / index * 100
+    document.title = spot.toFixed(2) + ' - ' + quarterly.toFixed(2) + ' - ' + diff.toFixed(2) + ' - ' + delta.toFixed(2) + '%'
 }
 
-function setValue(spanId, value) {
+function setValue(spanId, value, store) {
+
+    if (store != false) store = true
+
     document.getElementById(spanId).textContent = value.toFixed(2)
     document.getElementById(spanId).setAttribute('exact-value', value)
+
+    if (store && spanId.match(/min|max/)) {
+        storeValue(spanId, value)
+    }
 }
 
 function setMinMaxValue(spanId, value) {
+
     var min = getValue(spanId + '-min', Infinity),
         max = getValue(spanId + '-max', -Infinity)
+
     if (value < min) {
         setValue(spanId + '-min', value)
     }
@@ -63,8 +79,10 @@ function setMinMaxValue(spanId, value) {
 }
 
 function setValueStyle(spanId, value, newValue) {
+
     var span = document.getElementById(spanId)
     span.style.fontSize = '16px'
+
     if (newValue > value) {
         span.style.color = 'green'
     }
@@ -77,8 +95,14 @@ function getIndex(ccy) {
     return getValue(ccy + '-price-index')
 }
 
+function getSpotBtcCny() {
+    return getValue('btc-price-cny')
+}
+
+function getQuarterlyBtc() {
+    return getValue('btc-price-quarterly')
+}
+
 function getValue(spanId, defaultValue) {
-    var span = document.getElementById(spanId)
-    if (span == null) console.log(spanId)
-    return parseFloat(span.getAttribute('exact-value')) || defaultValue
+    return parseFloat(document.getElementById(spanId).getAttribute('exact-value')) || defaultValue
 }

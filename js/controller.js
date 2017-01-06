@@ -1,3 +1,5 @@
+restoreMinMaxValues()
+
 new OKCoin('com', {
   ok_sub_futureusd_btc_index: handleMessage,
   ok_sub_futureusd_btc_trade_this_week: handleMessage,
