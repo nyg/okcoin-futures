@@ -1,14 +1,18 @@
-restoreMinMaxValues()
+document.getElementById('clear-min').onclick = clearMinValues
+document.getElementById('clear-max').onclick = clearMaxValues
+document.getElementById('clear-all').onclick = clearAllValues
+
+loadMinMaxValues()
 
 new OKCoin('com', {
-  ok_sub_futureusd_btc_index: handleMessage,
-  ok_sub_futureusd_btc_trade_this_week: handleMessage,
-  ok_sub_futureusd_btc_trade_next_week: handleMessage,
-  ok_sub_futureusd_btc_trade_quarter: handleMessage,
-  ok_sub_futureusd_ltc_index: handleMessage,
-  ok_sub_futureusd_ltc_trade_this_week: handleMessage,
-  ok_sub_futureusd_ltc_trade_next_week: handleMessage,
-  ok_sub_futureusd_ltc_trade_quarter: handleMessage,
+    ok_sub_futureusd_btc_index: handleMessage,
+    ok_sub_futureusd_btc_trade_this_week: handleMessage,
+    ok_sub_futureusd_btc_trade_next_week: handleMessage,
+    ok_sub_futureusd_btc_trade_quarter: handleMessage,
+    ok_sub_futureusd_ltc_index: handleMessage,
+    ok_sub_futureusd_ltc_trade_this_week: handleMessage,
+    ok_sub_futureusd_ltc_trade_next_week: handleMessage,
+    ok_sub_futureusd_ltc_trade_quarter: handleMessage,
 }).start()
 
 new OKCoin('cn', {

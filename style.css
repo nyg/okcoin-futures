@@ -2,6 +2,13 @@
     font-family: Menlo, Consolas, monospace;
 }
 
+html, body {
+  height: 100%;
+  margin: 0px;
+  display: flex;
+  flex-flow: column;
+}
+
 table {
     border-collapse: collapse;
     font-size: 11px;
@@ -11,7 +18,7 @@ table {
 
 caption {
     font-size: 14px;
-    padding: 25px 0px 30px 0px;
+    padding: 20px 0px 25px 0px;
 }
 
 th {
@@ -21,7 +28,7 @@ th {
 
 th, td {
     text-align: right;
-    padding: 10px 20px 10px 0px;
+    padding: 10px;
     border: 1px solid black;
 }
 
@@ -41,18 +48,32 @@ table tr *:last-child {
     border-right: none;
 }
 
+.flex {
+    flex: 1 1 auto;
+}
+
 p {
     text-align: center;
 }
 
-.footer, a {
-  font-size: 10px;
+.info {
+    width: 450px;
+    margin: auto;
+    padding: 15px;
+    font-family: sans-serif;
+    font-size: 13px;
+    border-radius: 10px;
+    background-color: #FFFACD;
+}
+
+.links, a {
+    font-size: 10px;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }

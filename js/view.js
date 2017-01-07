@@ -67,8 +67,8 @@ function setValue(spanId, value, store) {
 
 function setMinMaxValue(spanId, value) {
 
-    var min = getValue(spanId + '-min', Infinity),
-        max = getValue(spanId + '-max', -Infinity)
+    var min = getStoredValue(spanId + '-min', Infinity),
+        max = getStoredValue(spanId + '-max', -Infinity)
 
     if (value < min) {
         setValue(spanId + '-min', value)

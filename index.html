@@ -1,159 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>OKCoin Futures Premium</title>
-    <link rel="stylesheet" href="style.css" type="text/css"/>
-    <script src="js/okcoin-api/okcoin-api.js"></script>
-    <script src="js/dao.js"></script>
-    <script src="js/view.js"></script>
-  </head>
-  <body>
-      <p>OKCoin Futures Premium Compared to the Futures Index</p>
+    <head>
+        <meta charset="utf-8">
+        <title>OKCoin Futures Premium</title>
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+        <script src="js/okcoin-api/okcoin-api.js"></script>
+        <script src="js/dao.js"></script>
+        <script src="js/view.js"></script>
+    </head>
+    <body>
+        <p>OKCoin Futures Premium Compared to the Futures Index</p>
 
-      <table>
-          <caption>Bitcoin</caption>
-          <tr class="top">
-              <th class="left"></th>
-              <th>Spot CNY</th>
-              <th>Index</th>
-              <th>Weekly</th>
-              <th>Bi-Weekly</th>
-              <th>Quarterly</th>
-          </tr>
-          <tr>
-              <th class="left">Last</th>
-              <td>
-                  <span id="btc-price-cny"></span><br>
-                  <span id="btc-price-cny-min"></span> - <span id="btc-price-cny-max"></span>
-              </td>
-              <td>
-                  <span id="btc-price-index"></span><br>
-                  <span id="btc-price-index-min"></span> - <span id="btc-price-index-max"></span>
-              </td>
-              <td>
-                  <span id="btc-price-weekly"></span><br>
-                  <span id="btc-price-weekly-min"></span> - <span id="btc-price-weekly-max"></span>
-              </td>
-              <td>
-                  <span id="btc-price-bi-weekly"></span><br>
-                  <span id="btc-price-bi-weekly-min"></span> - <span id="btc-price-bi-weekly-max"></span>
-              </td>
-              <td>
-                  <span id="btc-price-quarterly"></span><br>
-                  <span id="btc-price-quarterly-min"></span> - <span id="btc-price-quarterly-max"></span>
-              </td>
-          </tr>
-          <tr>
-              <th class="left">±</th>
-              <td></td>
-              <td></td>
-              <td>
-                  <span id="btc-diff-weekly"></span><br>
-                  <span id="btc-diff-weekly-min"></span> - <span id="btc-diff-weekly-max"></span>
-              </td>
-              <td>
-                  <span id="btc-diff-bi-weekly"></span><br>
-                  <span id="btc-diff-bi-weekly-min"></span> - <span id="btc-diff-bi-weekly-max"></span>
-              </td>
-              <td>
-                  <span id="btc-diff-quarterly"></span><br>
-                  <span id="btc-diff-quarterly-min"></span> - <span id="btc-diff-quarterly-max"></span>
-              </td>
-          </tr>
-          <tr class="bottom">
-              <th class="left">%</th>
-              <td></td>
-              <td></td>
-              <td>
-                  <span id="btc-perc-weekly"></span><br>
-                  <span id="btc-perc-weekly-min"></span> - <span id="btc-perc-weekly-max"></span>
-              </td>
-              <td>
-                  <span id="btc-perc-bi-weekly"></span><br>
-                  <span id="btc-perc-bi-weekly-min"></span> - <span id="btc-perc-bi-weekly-max"></span>
-              </td>
-              <td>
-                  <span id="btc-perc-quarterly"></span><br>
-                  <span id="btc-perc-quarterly-min"></span> - <span id="btc-perc-quarterly-max"></span>
-              </td>
-          </tr>
-      </table>
+        <table>
+            <caption>Bitcoin</caption>
+            <tr class="top">
+                <th class="left"></th>
+                <th>Spot CNY</th>
+                <th>Index</th>
+                <th>Weekly</th>
+                <th>Bi-Weekly</th>
+                <th>Quarterly</th>
+            </tr>
+            <tr>
+                <th class="left">Last</th>
+                <td>
+                    <span id="btc-price-cny"></span><br>
+                    <span id="btc-price-cny-min"></span> - <span id="btc-price-cny-max"></span>
+                </td>
+                <td>
+                    <span id="btc-price-index"></span><br>
+                    <span id="btc-price-index-min"></span> - <span id="btc-price-index-max"></span>
+                </td>
+                <td>
+                    <span id="btc-price-weekly"></span><br>
+                    <span id="btc-price-weekly-min"></span> - <span id="btc-price-weekly-max"></span>
+                </td>
+                <td>
+                    <span id="btc-price-bi-weekly"></span><br>
+                    <span id="btc-price-bi-weekly-min"></span> - <span id="btc-price-bi-weekly-max"></span>
+                </td>
+                <td>
+                    <span id="btc-price-quarterly"></span><br>
+                    <span id="btc-price-quarterly-min"></span> - <span id="btc-price-quarterly-max"></span>
+                </td>
+            </tr>
+            <tr>
+                <th class="left">±</th>
+                <td></td>
+                <td></td>
+                <td>
+                    <span id="btc-diff-weekly"></span><br>
+                    <span id="btc-diff-weekly-min"></span> - <span id="btc-diff-weekly-max"></span>
+                </td>
+                <td>
+                    <span id="btc-diff-bi-weekly"></span><br>
+                    <span id="btc-diff-bi-weekly-min"></span> - <span id="btc-diff-bi-weekly-max"></span>
+                </td>
+                <td>
+                    <span id="btc-diff-quarterly"></span><br>
+                    <span id="btc-diff-quarterly-min"></span> - <span id="btc-diff-quarterly-max"></span>
+                </td>
+            </tr>
+            <tr class="bottom">
+                <th class="left">%</th>
+                <td></td>
+                <td></td>
+                <td>
+                    <span id="btc-perc-weekly"></span><br>
+                    <span id="btc-perc-weekly-min"></span> - <span id="btc-perc-weekly-max"></span>
+                </td>
+                <td>
+                    <span id="btc-perc-bi-weekly"></span><br>
+                    <span id="btc-perc-bi-weekly-min"></span> - <span id="btc-perc-bi-weekly-max"></span>
+                </td>
+                <td>
+                    <span id="btc-perc-quarterly"></span><br>
+                    <span id="btc-perc-quarterly-min"></span> - <span id="btc-perc-quarterly-max"></span>
+                </td>
+            </tr>
+        </table>
 
-      <table>
-          <caption>Litecoin</caption>
-          <tr class="top">
-              <th class="left"></th>
-              <th>Spot CNY</th>
-              <th>Index</th>
-              <th>Weekly</th>
-              <th>Bi-Weekly</th>
-              <th>Quarterly</th>
-          </tr>
-          <tr>
-              <th class="left">Last</th>
-              <td>
-                  <span id="ltc-price-cny"></span><br>
-                  <span id="ltc-price-cny-min"></span> - <span id="ltc-price-cny-max"></span>
-              </td>
-              <td>
-                  <span id="ltc-price-index"></span><br>
-                  <span id="ltc-price-index-min"></span> - <span id="ltc-price-index-max"></span>
-              </td>
-              <td>
-                  <span id="ltc-price-weekly"></span><br>
-                  <span id="ltc-price-weekly-min"></span> - <span id="ltc-price-weekly-max"></span>
-              </td>
-              <td>
-                  <span id="ltc-price-bi-weekly"></span><br>
-                  <span id="ltc-price-bi-weekly-min"></span> - <span id="ltc-price-bi-weekly-max"></span>
-              </td>
-              <td>
-                  <span id="ltc-price-quarterly"></span><br>
-                  <span id="ltc-price-quarterly-min"></span> - <span id="ltc-price-quarterly-max"></span>
-              </td>
-          </tr>
-          <tr>
-              <th class="left">±</th>
-              <td></td>
-              <td></td>
-              <td>
-                  <span id="ltc-diff-weekly"></span><br>
-                  <span id="ltc-diff-weekly-min"></span> - <span id="ltc-diff-weekly-max"></span>
-              </td>
-              <td>
-                  <span id="ltc-diff-bi-weekly"></span><br>
-                  <span id="ltc-diff-bi-weekly-min"></span> - <span id="ltc-diff-bi-weekly-max"></span>
-              </td>
-              <td>
-                  <span id="ltc-diff-quarterly"></span><br>
-                  <span id="ltc-diff-quarterly-min"></span> - <span id="ltc-diff-quarterly-max"></span>
-              </td>
-          </tr>
-          <tr class="bottom">
-              <th class="left">%</th>
-              <td></td>
-              <td></td>
-              <td>
-                  <span id="ltc-perc-weekly"></span><br>
-                  <span id="ltc-perc-weekly-min"></span> - <span id="ltc-perc-weekly-max"></span>
-              </td>
-              <td>
-                  <span id="ltc-perc-bi-weekly"></span><br>
-                  <span id="ltc-perc-bi-weekly-min"></span> - <span id="ltc-perc-bi-weekly-max"></span>
-              </td>
-              <td>
-                  <span id="ltc-perc-quarterly"></span><br>
-                  <span id="ltc-perc-quarterly-min"></span> - <span id="ltc-perc-quarterly-max"></span>
-              </td>
-          </tr>
-      </table>
+        <table>
+            <caption>Litecoin</caption>
+            <tr class="top">
+                <th class="left"></th>
+                <th>Spot CNY</th>
+                <th>Index</th>
+                <th>Weekly</th>
+                <th>Bi-Weekly</th>
+                <th>Quarterly</th>
+            </tr>
+            <tr>
+                <th class="left">Last</th>
+                <td>
+                    <span id="ltc-price-cny"></span><br>
+                    <span id="ltc-price-cny-min"></span> - <span id="ltc-price-cny-max"></span>
+                </td>
+                <td>
+                    <span id="ltc-price-index"></span><br>
+                    <span id="ltc-price-index-min"></span> - <span id="ltc-price-index-max"></span>
+                </td>
+                <td>
+                    <span id="ltc-price-weekly"></span><br>
+                    <span id="ltc-price-weekly-min"></span> - <span id="ltc-price-weekly-max"></span>
+                </td>
+                <td>
+                    <span id="ltc-price-bi-weekly"></span><br>
+                    <span id="ltc-price-bi-weekly-min"></span> - <span id="ltc-price-bi-weekly-max"></span>
+                </td>
+                <td>
+                    <span id="ltc-price-quarterly"></span><br>
+                    <span id="ltc-price-quarterly-min"></span> - <span id="ltc-price-quarterly-max"></span>
+                </td>
+            </tr>
+            <tr>
+                <th class="left">±</th>
+                <td></td>
+                <td></td>
+                <td>
+                    <span id="ltc-diff-weekly"></span><br>
+                    <span id="ltc-diff-weekly-min"></span> - <span id="ltc-diff-weekly-max"></span>
+                </td>
+                <td>
+                    <span id="ltc-diff-bi-weekly"></span><br>
+                    <span id="ltc-diff-bi-weekly-min"></span> - <span id="ltc-diff-bi-weekly-max"></span>
+                </td>
+                <td>
+                    <span id="ltc-diff-quarterly"></span><br>
+                    <span id="ltc-diff-quarterly-min"></span> - <span id="ltc-diff-quarterly-max"></span>
+                </td>
+            </tr>
+            <tr class="bottom">
+                <th class="left">%</th>
+                <td></td>
+                <td></td>
+                <td>
+                    <span id="ltc-perc-weekly"></span><br>
+                    <span id="ltc-perc-weekly-min"></span> - <span id="ltc-perc-weekly-max"></span>
+                </td>
+                <td>
+                    <span id="ltc-perc-bi-weekly"></span><br>
+                    <span id="ltc-perc-bi-weekly-min"></span> - <span id="ltc-perc-bi-weekly-max"></span>
+                </td>
+                <td>
+                    <span id="ltc-perc-quarterly"></span><br>
+                    <span id="ltc-perc-quarterly-min"></span> - <span id="ltc-perc-quarterly-max"></span>
+                </td>
+            </tr>
+        </table>
 
-      <p class="footer">
-          <a href="https://nyg.github.io">home</a> -
-          <a href="https://github.com/nyg/okcoin-futures">github</a>
-      </p>
+        <div class="flex"></div>
 
-      <script src="js/controller.js"></script>
-  </body>
+        <p class="info">
+            Minimum and maximum values are stored in your browser's local storage. They will be remembered even after navigating away from this page.<br><br>
+            <input type="button" id="clear-min" value="Clear minimums">
+            <input type="button" id="clear-all" value="Clear all">
+            <input type="button" id="clear-max" value="Clear maximums">
+        </p>
+
+        <p class="links">
+            <a href="https://nyg.github.io">home</a> -
+            <a href="https://github.com/nyg/okcoin-futures">github</a>
+        </p>
+
+        <script src="js/controller.js"></script>
+    </body>
 </html>
