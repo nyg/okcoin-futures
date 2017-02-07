@@ -50,7 +50,7 @@ function updatePageTitle() {
         quarterly = getQuarterlyBtc() || 0,
         diff = quarterly - index,
         delta = diff / index * 100
-    document.title = spot.toFixed(2) + ' - ' + quarterly.toFixed(2) + ' - ' + diff.toFixed(2) + ' - ' + delta.toFixed(2) + '%'
+    document.title = spot.toFixed(2) + ' • ' + quarterly.toFixed(2) + ' • ' + diff.toFixed(2) + ' • ' + delta.toFixed(2) + '%'
 }
 
 function setValue(spanId, value, store) {

@@ -2,7 +2,9 @@ function loadMinMaxValues() {
     if (typeof Storage !== "undefined") {
         for (var i = 0; i < localStorage.length; ++i) {
             var key = localStorage.key(i)
-            setValue(key, parseFloat(localStorage.getItem(key)), false)
+            if (key.match(/ltc|btc/)) {
+                setValue(key, parseFloat(localStorage.getItem(key)), false)
+            }
         }
     }
 }
@@ -28,7 +30,7 @@ function clearMaxValues() {
 }
 
 function clearAllValues() {
-    clearValues(/./)
+    clearValues(/min|max/)
 }
 
 function clearValues(regex) {
