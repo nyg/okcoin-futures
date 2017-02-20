@@ -56,7 +56,7 @@ p {
     text-align: center;
 }
 
-.info {
+.warning, .info {
     width: 450px;
     margin: auto;
     padding: 15px;
@@ -64,6 +64,11 @@ p {
     font-size: 13px;
     border-radius: 10px;
     background-color: #FFFACD;
+}
+
+.warning {
+    background-color: #FF6666;
+    margin-bottom: 10px;
 }
 
 .links, a {
