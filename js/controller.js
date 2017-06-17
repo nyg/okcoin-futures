@@ -4,7 +4,8 @@ document.getElementById('clear-all').onclick = clearAllValues
 
 loadMinMaxValues()
 
-new OKCoin('com', {
+new OKCoin()
+.setChannels({
     ok_sub_futureusd_btc_index: handleMessage,
     ok_sub_futureusd_btc_trade_this_week: handleMessage,
     ok_sub_futureusd_btc_trade_next_week: handleMessage,
@@ -13,12 +14,17 @@ new OKCoin('com', {
     ok_sub_futureusd_ltc_trade_this_week: handleMessage,
     ok_sub_futureusd_ltc_trade_next_week: handleMessage,
     ok_sub_futureusd_ltc_trade_quarter: handleMessage,
-}).start()
+})
+.isFutures()
+.start()
 
-new OKCoin('cn', {
+new OKCoin()
+.setChannels({
     ok_sub_spotcny_btc_trades: handleMessage,
     ok_sub_spotcny_ltc_trades: handleMessage
-}).start()
+})
+.isCny()
+.start()
 
 function handleMessage(message) {
     if (message.hasOwnProperty('data')) {
